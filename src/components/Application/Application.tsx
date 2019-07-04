@@ -1,16 +1,21 @@
 import React from "react";
+import routes from "config/routes";
 import { Route } from "react-router-dom";
-import { fetchPaste, IEditorState } from "store/types";
+import { fetchPaste } from "store/types";
 import { connect } from "react-redux";
-import { routes } from "../../config/routes";
-import { AppState } from "../../store/reducer";
+import { AppState } from "store/reducer";
+import { Paste } from "../../models/paste";
 
-interface IEditorDispatchProps {
+interface EditorDispatchProps {
   fetchPaste: typeof fetchPaste;
 }
 
+interface ConnectedProps {
+  editorData: Paste;
+}
+
 export class Application extends React.Component<
-  IEditorDispatchProps & IEditorState
+  EditorDispatchProps & ConnectedProps
 > {
   render() {
     const applicationRoutes: Array<any> = routes.map(

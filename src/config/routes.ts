@@ -1,6 +1,6 @@
 import { Application, Editor } from "components";
 
-export const routes = [
+export default [
   {
     path: "/",
     exact: true,

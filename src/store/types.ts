@@ -42,7 +42,3 @@ export type PasteActionTypes =
   | FetchPasteAction
   | CreatePasteAction
   | ForkPasteAction;
-
-export interface IEditorState {
-  editorData: Paste;
-}
