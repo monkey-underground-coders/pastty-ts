@@ -1,13 +1,14 @@
-import { Application, Editor } from "components";
+import Application from "#/components/Application";
+import Editor from "#/components/Editor";
 
 export default [
   {
     path: "/",
     exact: true,
-    component: Application
+    component: Application,
   },
   {
     path: "/:alias",
-    component: Editor
-  }
+    component: Editor,
+  },
 ];

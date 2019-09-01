@@ -6,21 +6,21 @@ export interface EditorState {
   editorData: Paste;
 }
 
-const editorInitialState: EditorState = {
+const initialState: EditorState = {
   editorData: {
     contents: "",
     description: "",
     mode: "",
     theme: "",
-    views: undefined
-  }
+    views: undefined,
+  },
 };
 
 export default createReducer(
   {
     [CREATE_PASTE]: (state: EditorState, action: Action) => state,
     [FETCH_PASTE]: (state: EditorState, action: Action) => state,
-    [FORK_PASTE]: (state: EditorState, action: Action) => state
+    [FORK_PASTE]: (state: EditorState, action: Action) => state,
   },
-  editorInitialState
+  initialState,
 );
