@@ -22,22 +22,24 @@ const initialResponseHandler = (response: any) => {
   return response.json();
 };
 
-export const postRequest = (url: string, body = {}) =>
+export const postRequest = (url: string, body = {}, headers = {}) =>
   fetch(url, {
     method: "POST",
-    headers: constructRequestHeaders(),
+    headers,
     body: JSON.stringify(body),
   }).then(initialResponseHandler);
 
-export const getRequest = (url: string) =>
-  fetch(url, {
-    headers: constructRequestHeaders(),
-  }).then(initialResponseHandler);
+export const postAuthenticatedRequest = (url: string, body = {}) => postRequest(url, body, constructRequestHeaders());
 
-export const putRequest = (url: string) =>
+export const getRequest = (url: string, headers = {}) => fetch(url, { headers }).then(initialResponseHandler);
+
+export const getAuthenticatedRequest = (url: string) => getRequest(url, constructRequestHeaders());
+
+export const putRequest = (url: string, body = {}) =>
   fetch(url, {
     method: "PUT",
     headers: constructRequestHeaders(),
+    body: JSON.stringify(body),
   }).then(initialResponseHandler);
 
 export const deleteRequest = (url: string) =>
