@@ -1,7 +1,7 @@
 import React from "react";
 
 const Editor = (props: {}) => {
-  return "";
+  return <div></div>;
 };
 
 export default Editor;

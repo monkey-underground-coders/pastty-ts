@@ -9,8 +9,9 @@ const getMiddleware = () => {
   if (process.env.NODE_ENV === "production") {
     return applyMiddleware();
   }
-
   return applyMiddleware(createLogger());
 };
 
 export const store = createStore(reducer, getMiddleware());
+
+export default store;
