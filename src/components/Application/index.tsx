@@ -7,7 +7,9 @@ import { AppState } from "store/reducer";
 interface ApplicationProps {}
 
 const Application = (props: ApplicationProps) => {
-  const applicationRoutes = routes.map((route: Record<string, any>, index: number) => <Route {...route} key={index} />);
+  const applicationRoutes = routes.map((route: Record<string, any>, index: number) => (
+    <Route {...route} key={index} />
+  ));
 
   return <div className="application-root">{applicationRoutes}</div>;
 };

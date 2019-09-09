@@ -29,9 +29,11 @@ export const postRequest = (url: string, body = {}, headers = {}) =>
     body: JSON.stringify(body),
   }).then(initialResponseHandler);
 
-export const postAuthenticatedRequest = (url: string, body = {}) => postRequest(url, body, constructRequestHeaders());
+export const postAuthenticatedRequest = (url: string, body = {}) =>
+  postRequest(url, body, constructRequestHeaders());
 
-export const getRequest = (url: string, headers = {}) => fetch(url, { headers }).then(initialResponseHandler);
+export const getRequest = (url: string, headers = {}) =>
+  fetch(url, { headers }).then(initialResponseHandler);
 
 export const getAuthenticatedRequest = (url: string) => getRequest(url, constructRequestHeaders());
 

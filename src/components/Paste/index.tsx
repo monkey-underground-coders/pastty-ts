@@ -7,12 +7,6 @@ interface PasteProps extends RouteComponentProps<{ alias: string }> {}
 const Paste = (props: PasteProps) => {
   const { alias } = props.match.params;
 
-  useEffect(() => {
-    fetchPaste(alias)
-      .then((json: any) => {})
-      .catch((err: Error) => {});
-  }, []);
-
   return <div></div>;
 };
 

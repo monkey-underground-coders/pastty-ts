@@ -17,10 +17,6 @@ export default (state = initialState, action: any) => {
       return { ...state };
     }
 
-    case ActionTypes.FETCH_PASTE: {
-      return { ...state };
-    }
-
     case ActionTypes.FORK_PASTE: {
       return { ...state };
     }
