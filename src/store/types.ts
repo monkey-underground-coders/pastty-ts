@@ -1,5 +1,12 @@
-import ActionTypes from "./actionTypes";
-import { Paste } from "models/paste";
+export type EditorMode = string;
+
+export interface Paste {
+  contents: string;
+  description: string;
+  mode: string;
+  theme: string;
+  views?: number;
+}
 
 export interface Action {
   type: string;

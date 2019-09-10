@@ -10,7 +10,13 @@
     /* Modern Browsers */ url("./fonts/FiraCode-Regular.ttf") format("truetype"); /* Safari, Android, iOS */
 }
 
+body {
+  font-family: "Rubik", sans-serif;
+}
+
 .editor-content,
 .CodeMirror {
   font-family: "Fira Code", "Consolas", monospace;
+  height: 500px;
+  cursor: text;
 }
