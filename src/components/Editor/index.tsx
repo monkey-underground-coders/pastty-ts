@@ -1,65 +1,61 @@
 import React from "react";
+import { connect } from "react-redux";
 import CodeMirror from "codemirror";
 import { Controlled as ReactCodeMirror } from "react-codemirror2";
-import { getModeTitle, availableModes } from "./util";
-
-import "codemirror/addon/hint/";
-
-import "codemirror/addon/hint/show-hint";
+import { getModeTitle, modes, InternalModeOption } from "./util";
+import { ReactSelectEvent, ReactButtonEvent, StoreRootState } from "#/store/types";
 import "codemirror/mode/javascript/javascript.js";
 import "codemirror/theme/gruvbox-dark.css";
 
-interface EditorOwnProps {}
+interface EditorOwnProps {
+  mode: InternalModeOption;
+}
 
 const Editor = (props: EditorOwnProps) => {
+  const { mode } = props;
   const [code, setCode] = React.useState("// Code");
-  const [mode, setMode] = React.useState("javascript");
 
-  const changeMode = (e: any) => {
-    const mode = e.target.value;
-    const tokens = mode.split("@");
-    const modeSignature = tokens.length > 1 ? tokens[0] : mode;
-    import(`codemirror/mode/${modeSignature}/${modeSignature}`).then(() => {
-      setMode(mode);
-    });
-  };
-
-  const createPaste = (e: any) => {
+  const createPaste = (e: ReactButtonEvent) => {
     const stringifiedContent = JSON.stringify(code);
+    console.log(stringifiedContent);
   };
 
   const options = {
     lineNumbers: true,
     autoFocus: true,
     theme: "gruvbox-dark",
-    mode: getModeTitle(mode),
+    mode: getModeTitle(mode.signature),
   };
 
   return (
     <>
-      <div>
-        <select className="form-control" onChange={changeMode} value={mode}>
-          {availableModes.map((mode: any, key: number) => (
-            <option key={key} value={mode.signature}>
-              {mode.value}
-            </option>
-          ))}
-        </select>
-      </div>
       <div className="editor-content">
         <ReactCodeMirror
           value={code}
-          onBeforeChange={(editor: any, data: any, value: any) => setCode(value)}
+          onBeforeChange={(
+            editor: CodeMirror.Editor,
+            data: CodeMirror.EditorChange,
+            value: string,
+          ) => setCode(value)}
           options={options}
         />
       </div>
       <div>
         <button className="btn btn-primary" onClick={createPaste}>
-          Send
+          Save Code
         </button>
       </div>
     </>
   );
 };
 
-export default Editor;
+const mapStateToProps = (state: StoreRootState) => ({
+  mode: state.editor.editorData.mode,
+});
+
+const mapDispatchToProps = {};
+
+export default connect(
+  mapStateToProps,
+  mapDispatchToProps,
+)(Editor);

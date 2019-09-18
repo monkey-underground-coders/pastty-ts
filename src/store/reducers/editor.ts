@@ -1,11 +1,12 @@
 import ActionTypes from "#/store/actionTypes";
 import { EditorState } from "../types";
+import { modes } from "#/components/Editor/util";
 
 const initialState: EditorState = {
   editorData: {
     contents: "",
     description: "",
-    mode: "",
+    mode: modes["java"],
     theme: "",
     views: undefined,
   },
@@ -13,6 +14,10 @@ const initialState: EditorState = {
 
 export default (state = initialState, action: any) => {
   switch (action.type) {
+    case ActionTypes.CHANGE_MODE: {
+      return { ...state, editorData: { ...state.editorData, mode: action.payload } };
+    }
+
     case ActionTypes.CREATE_PASTE: {
       return { ...state };
     }

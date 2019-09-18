@@ -1,9 +1,13 @@
+import { InternalModeOption } from "#/components/Editor/util";
+
+export type ReactSelectEvent = React.ChangeEvent<HTMLSelectElement>;
+export type ReactButtonEvent = React.MouseEvent<HTMLButtonElement, MouseEvent>;
 export type EditorMode = string;
 
 export interface Paste {
   contents: string;
   description: string;
-  mode: string;
+  mode: InternalModeOption;
   theme: string;
   views?: number;
 }

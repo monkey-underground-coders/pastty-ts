@@ -3,6 +3,7 @@ import routes from "#/config/routes";
 import { Route } from "react-router-dom";
 import { connect } from "react-redux";
 import { AppState } from "store/reducer";
+import Navbar from "../Navbar";
 
 interface ApplicationProps {}
 
@@ -11,7 +12,12 @@ const Application = (props: ApplicationProps) => {
     <Route {...route} key={index} />
   ));
 
-  return <div className="application-root">{applicationRoutes}</div>;
+  return (
+    <div className="application-root">
+      <Navbar />
+      {applicationRoutes}
+    </div>
+  );
 };
 
 const mapStateToProps = (state: AppState) => ({});
