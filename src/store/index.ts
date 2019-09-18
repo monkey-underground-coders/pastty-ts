@@ -1,17 +1,23 @@
-import { applyMiddleware, createStore } from "redux";
-import { createLogger } from "redux-logger";
+import { applyMiddleware, compose, createStore } from "redux";
+import thunkMiddleware from "redux-thunk";
 import { createBrowserHistory } from "history";
 import reducer from "./reducer";
+import { StoreRootState } from "./types";
 
 export const history = createBrowserHistory();
 
-const getMiddleware = () => {
-  if (process.env.NODE_ENV === "production") {
-    return applyMiddleware();
+declare global {
+  interface Window {
+    __REDUX_DEVTOOLS_EXTENSION_COMPOSE__?: any;
   }
-  return applyMiddleware(createLogger());
-};
+}
 
-export const store = createStore(reducer, getMiddleware());
+const initialState: StoreRootState = {} as any;
+
+export const store = (() => {
+  const composeEnhancers = window.__REDUX_DEVTOOLS_EXTENSION_COMPOSE__ || compose;
+  const enhancer = composeEnhancers(applyMiddleware(thunkMiddleware));
+  return createStore(reducer, initialState as any, enhancer);
+})();
 
 export default store;

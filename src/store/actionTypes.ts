@@ -10,6 +10,8 @@ export enum ActionTypes {
   FETCH_PASTE_FAIL = "FETCH_PASTE_FAIL",
   CREATE_PASTE = "CREATE_PASTE",
   FORK_PASTE = "FORK_PASTE",
+
+  CHANGE_MODE = "CHANGE_MODE",
 }
 
 export default ActionTypes;
