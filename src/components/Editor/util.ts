@@ -4,33 +4,33 @@ export interface InternalModeOption {
 }
 
 export const modes: Record<string, InternalModeOption> = {
-  javascript: {
+  JavaScript: {
     signature: "javascript",
-    value: "javascript",
+    value: "JavaScript",
   },
-  cpp: {
+  "C++": {
     signature: "clike@text/x-c++src",
-    value: "cpp",
+    value: "C++",
   },
-  c: {
+  "C lang": {
     signature: "clike@text/x-csrc",
-    value: "C",
+    value: "C lang",
   },
-  java: {
+  Java: {
     signature: "clike@text/x-java",
-    value: "java",
+    value: "Java",
   },
-  "C#": {
+  "C Sharp": {
     signature: "clike@text/x-csharp",
-    value: "c#",
+    value: "C Sharp",
   },
   "Objective-C": {
     signature: "clike@text/x-objectivec",
-    value: "objective-c",
+    value: "Objective-C",
   },
   Scala: {
     signature: "clike@text/x-scala",
-    value: "scala",
+    value: "Scala",
   },
 };
 

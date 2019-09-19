@@ -12,6 +12,11 @@ export enum ActionTypes {
   FORK_PASTE = "FORK_PASTE",
 
   CHANGE_MODE = "CHANGE_MODE",
+
+  SET_EDITOR_MODE = "SET_EDITOR_MODE",
+  SET_PASTE_MODE = "SET_PASTE_MODE",
+
+  EDITOR_CONTENT_CHANGE = "EDITOR_CONTENT_CHANGE"
 }
 
 export default ActionTypes;

@@ -4,21 +4,18 @@ import CodeMirror from "codemirror";
 import { Controlled as ReactCodeMirror } from "react-codemirror2";
 import { getModeTitle, modes, InternalModeOption } from "./util";
 import { ReactSelectEvent, ReactButtonEvent, StoreRootState } from "#/store/types";
+import { setContents } from "#/store/actions/editor";
 import "codemirror/mode/javascript/javascript.js";
 import "codemirror/theme/gruvbox-dark.css";
 
 interface EditorOwnProps {
+  contents: string;
+  setContents: any;
   mode: InternalModeOption;
 }
 
 const Editor = (props: EditorOwnProps) => {
-  const { mode } = props;
-  const [code, setCode] = React.useState("// Code");
-
-  const createPaste = (e: ReactButtonEvent) => {
-    const stringifiedContent = JSON.stringify(code);
-    console.log(stringifiedContent);
-  };
+  const { mode, contents, setContents } = props;
 
   const options = {
     lineNumbers: true,
@@ -31,19 +28,14 @@ const Editor = (props: EditorOwnProps) => {
     <>
       <div className="editor-content">
         <ReactCodeMirror
-          value={code}
+          value={contents}
           onBeforeChange={(
             editor: CodeMirror.Editor,
             data: CodeMirror.EditorChange,
             value: string,
-          ) => setCode(value)}
+          ) => setContents(value)}
           options={options}
         />
-      </div>
-      <div>
-        <button className="btn btn-primary" onClick={createPaste}>
-          Save Code
-        </button>
       </div>
     </>
   );
@@ -51,9 +43,12 @@ const Editor = (props: EditorOwnProps) => {
 
 const mapStateToProps = (state: StoreRootState) => ({
   mode: state.editor.editorData.mode,
+  contents: state.editor.editorData.contents,
 });
 
-const mapDispatchToProps = {};
+const mapDispatchToProps = {
+  setContents,
+};
 
 export default connect(
   mapStateToProps,
