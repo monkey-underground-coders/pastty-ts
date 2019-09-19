@@ -4,7 +4,7 @@ import { Route } from "react-router-dom";
 import { connect } from "react-redux";
 import { AppState } from "store/reducer";
 import Navbar from "../Navbar";
-import OctoCat from "../OctoCat";
+import "./index.scss";
 
 interface ApplicationProps {}
 
@@ -15,9 +15,10 @@ const Application = (props: ApplicationProps) => {
 
   return (
     <div className="application-root">
-      <OctoCat />
-      <Navbar />
-      {applicationRoutes}
+      <div className="application-root__inner">
+        <Navbar />
+        {applicationRoutes}
+      </div>
     </div>
   );
 };
