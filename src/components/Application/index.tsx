@@ -17,6 +17,7 @@ const Application = (props: ApplicationProps) => {
     <div className="application-root">
       <div className="application-root__inner">
         <Navbar />
+
         {applicationRoutes}
       </div>
     </div>

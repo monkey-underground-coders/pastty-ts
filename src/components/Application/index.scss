@@ -1,8 +1,14 @@
 $border-root-size: 5px;
 
 .application-root {
+  display: flex;
+  flex-direction: column;
+  height: 100vh;
+  align-content: center;
+  justify-content: center;
+
   &__inner {
-    margin: 3rem;
+    margin: 0 3rem;
     box-shadow: -2px 5px 5px 0px rgba(0, 0, 0, 0.75);
 
     // This may be an alternative
