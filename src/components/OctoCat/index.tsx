@@ -3,13 +3,14 @@ import React from "react";
 const OctoCat = () => {
   return (
     <a
+      target="_blank"
       href="https://github.com/phen0menon/pastty-ts"
       className="github-corner"
       aria-label="View source on GitHub"
     >
       <svg
-        width="80"
-        height="80"
+        width="58"
+        height="58"
         viewBox="0 0 250 250"
         style={{
           fill: "#607d8b",
