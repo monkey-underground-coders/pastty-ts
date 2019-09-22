@@ -8,6 +8,10 @@ import { setContents } from "#/store/actions/editor";
 import "codemirror/mode/javascript/javascript.js";
 import "codemirror/theme/gruvbox-dark.css";
 
+import "codemirror/addon/display/placeholder";
+import "codemirror/addon/edit/matchbrackets";
+import "codemirror/addon/edit/closebrackets";
+
 interface EditorOwnProps {
   contents: string;
   setContents: any;
@@ -19,11 +23,16 @@ interface EditorOwnProps {
 const Editor = (props: EditorOwnProps) => {
   const { mode, contents, setContents, className } = props;
 
-  const options = {
+  console.log();
+
+  const options: CodeMirror.EditorConfiguration = {
     lineNumbers: true,
-    autoFocus: true,
+    autofocus: true,
     theme: "gruvbox-dark",
     mode: getModeTitle(mode.signature),
+    placeholder: "// Code",
+    matchBrackets: true,
+    autoCloseBrackets: true,
   };
 
   return (

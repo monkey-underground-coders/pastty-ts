@@ -3,7 +3,6 @@ import { modes, InternalModeOption } from "../Editor/util";
 import { changeMode } from "#/store/actions/editor";
 import { StoreRootState, ReactSelectEvent } from "#/store/types";
 import { connect } from "react-redux";
-import { RouteComponentProps } from "react-router";
 
 interface ModeSelectProps {
   changeMode: any;
