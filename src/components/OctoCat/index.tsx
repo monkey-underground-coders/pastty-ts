@@ -17,7 +17,7 @@ const OctoCat = () => {
           position: "absolute",
           top: 0,
           border: 0,
-          right: 0,
+          right: 0
         }}
         aria-hidden="true"
       >

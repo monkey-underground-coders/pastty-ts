@@ -12,10 +12,12 @@ interface EditorOwnProps {
   contents: string;
   setContents: any;
   mode: InternalModeOption;
+  className?: string;
+  noRightRound?: string;
 }
 
 const Editor = (props: EditorOwnProps) => {
-  const { mode, contents, setContents } = props;
+  const { mode, contents, setContents, className } = props;
 
   const options = {
     lineNumbers: true,
@@ -26,7 +28,7 @@ const Editor = (props: EditorOwnProps) => {
 
   return (
     <>
-      <div className="editor-content">
+      <div className={`editor-content ${className}`}>
         <ReactCodeMirror
           value={contents}
           onBeforeChange={(
