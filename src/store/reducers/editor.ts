@@ -5,9 +5,9 @@ import { modes } from "#/components/Editor/util";
 const initialState: EditorState = {
   currentEditorMode: EditorModes.Editor,
   editorData: {
-    contents: "// Code",
+    contents: "",
     description: "",
-    mode: modes.Java,
+    mode: modes.JavaScript,
     theme: "",
     views: undefined,
   },
