@@ -1,5 +1,5 @@
 import React from "react";
-import routes from "#/config/routes";
+import routes from "#/routes/app";
 import { Route } from "react-router-dom";
 import { connect } from "react-redux";
 import { AppState } from "store/reducer";
