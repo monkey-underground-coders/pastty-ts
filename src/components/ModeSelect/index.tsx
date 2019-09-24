@@ -1,5 +1,5 @@
 import React from "react";
-import { modes, InternalModeOption } from "../Editor/util";
+import { modes, InternalModeOption } from "../../scenes/Main/Editor/util";
 import { changeMode } from "#/store/actions/editor";
 import { StoreRootState, ReactSelectEvent } from "#/store/types";
 import { connect } from "react-redux";

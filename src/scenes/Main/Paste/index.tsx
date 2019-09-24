@@ -1,7 +1,7 @@
 import React, { useEffect } from "react";
-import { RouteComponentProps } from "react-router";
+import { RouteComponentProps, withRouter } from "react-router";
 import { fetchPaste } from "#/store/actions/editor";
-import Editor from "#/components/Editor";
+import Editor from "#/scenes/Main/Editor";
 import "./index.scss";
 
 interface PasteProps extends RouteComponentProps<{ alias: string }> {}
@@ -39,4 +39,4 @@ const Paste = (props: PasteProps) => {
   );
 };
 
-export default Paste;
+export default withRouter(Paste);

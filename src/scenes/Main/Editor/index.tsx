@@ -23,8 +23,6 @@ interface EditorOwnProps {
 const Editor = (props: EditorOwnProps) => {
   const { mode, contents, setContents, className } = props;
 
-  console.log();
-
   const options: CodeMirror.EditorConfiguration = {
     lineNumbers: true,
     autofocus: true,

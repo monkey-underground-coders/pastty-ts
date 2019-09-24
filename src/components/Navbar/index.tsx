@@ -4,23 +4,23 @@ import { connect } from "react-redux";
 import { withRouter, RouteComponentProps } from "react-router";
 import { StoreRootState, EditorModes } from "#/store/types";
 import { createPaste, forkPaste } from "#/store/actions/editor";
-import "./index.scss";
 import ModeSelect from "../ModeSelect";
 import OctoCat from "../OctoCat";
+import "./index.scss";
 
 interface NavbarProps extends RouteComponentProps {
   forkPaste: any;
   createPaste: any;
   currentEditorMode: EditorModes;
+
+  isAuthorized?: boolean;
 }
 
 const Navbar = (props: NavbarProps) => {
-  const { currentEditorMode, createPaste } = props;
+  const { currentEditorMode, createPaste, isAuthorized = false } = props;
 
   return (
     <div className="header-module col-12 no-front-paddings">
-      <OctoCat />
-
       <nav className="navbar navbar-expand navbar-dark bg-dark py-2">
         <a className="navbar-brand d-none d-sm-block" href="#">
           Pastty
@@ -60,21 +60,21 @@ const Navbar = (props: NavbarProps) => {
             </li>
             <li className="nav-item ml-2 syntax-select-item">
               <ModeSelect />
-              </li>
-              </ul>
-            <form className="form-inline login-btns">
-                <button className = "btn btn-success sign-in-btn">
-                  <i className = "fa fa-sign-in-alt"  />
-                  <span className="ml-2">Sign In</span>
-                  </button>
-
-                <button className = "btn btn-success sign-out-btn">
-                  <i className = "fa fa-sign-out-alt"  />
-                  <span className="ml-2">Sign Out</span>
-                  </button>
-
-              </form>
-
+            </li>
+          </ul>
+          <form className="form-inline login-btns">
+            {isAuthorized ? (
+              <button className="btn btn-outline-success login-btns__signout">
+                <i className="fa fa-sign-out-alt" />
+                <span className="ml-2">Sign Out</span>
+              </button>
+            ) : (
+              <button className="btn btn-outline-success login-btns__signin">
+                <i className="fa fa-sign-in-alt" />
+                <span className="ml-2">Sign In</span>
+              </button>
+            )}
+          </form>
         </div>
       </nav>
     </div>

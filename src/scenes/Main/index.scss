@@ -1,0 +1,48 @@
+$border-root-size: 5px;
+
+.main-scene {
+  display: flex;
+  flex-direction: column;
+  height: 100vh;
+  align-content: center;
+  justify-content: center;
+
+  &__inner {
+    margin: 0 3rem;
+    margin-bottom: 2rem;
+    box-shadow: -2px 5px 5px 0px rgba(0, 0, 0, 0.75);
+
+    // This may be an alternative
+    // box-shadow: 0px 4px 10px 3px rgba(0, 0, 0, 0.75)
+    border-radius: $border-root-size;
+  }
+
+  .header-module {
+    .navbar {
+      border-top-left-radius: $border-root-size;
+    }
+
+    .navbar,
+    a.github-corner svg {
+      border-top-right-radius: $border-root-size;
+    }
+  }
+
+  .CodeMirror {
+    border-bottom-left-radius: $border-root-size;
+    border-bottom-right-radius: $border-root-size;
+
+    &-vscrollbar {
+      cursor: default;
+
+      &::-webkit-scrollbar {
+        width: 16px;
+      }
+
+      &::-webkit-scrollbar-thumb {
+        background-color: #343a40;
+        outline: 1px solid #343a40;
+      }
+    }
+  }
+}

@@ -1,4 +1,4 @@
-import { InternalModeOption } from "#/components/Editor/util";
+import { InternalModeOption } from "#/scenes/Main/Editor/util";
 
 // Control application modes
 export enum EditorModes {

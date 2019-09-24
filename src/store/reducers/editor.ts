@@ -1,6 +1,6 @@
 import ActionTypes from "#/store/actionTypes";
 import { EditorState, EditorModes } from "../types";
-import { modes } from "#/components/Editor/util";
+import { modes } from "#/scenes/Main/Editor/util";
 
 const initialState: EditorState = {
   currentEditorMode: EditorModes.Editor,

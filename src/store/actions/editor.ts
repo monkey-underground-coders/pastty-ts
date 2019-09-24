@@ -1,7 +1,7 @@
 import { Dispatch } from "redux";
 import ActionTypes from "../actionTypes";
 import { getRequest } from "#/agent";
-import { InternalModeOption } from "#/components/Editor/util";
+import { InternalModeOption } from "#/scenes/Main/Editor/util";
 import { StoreRootState } from "../types";
 
 export const createPaste = () => (dispatch: Dispatch, getState: () => StoreRootState) => {
