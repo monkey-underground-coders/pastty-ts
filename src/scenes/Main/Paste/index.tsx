@@ -7,8 +7,9 @@ import { connect } from "react-redux";
 import { StoreRootState, ExternalPaste } from "#/store/types";
 import { modes, InternalModeOption } from "../Editor/util";
 import _ from "lodash";
+import { formatDateTime } from "#/util/functions";
 
-const constructPasteLink = (alias: string) => `${window.location.href}alias`;
+const constructPasteLink = (alias: string) => `${window.location.href}${alias}`;
 
 interface PasteProps extends RouteComponentProps<{ alias: string }> {
   fetchPaste: any;
@@ -25,16 +26,17 @@ const Paste = (props: PasteProps) => {
     props.fetchPaste(alias).then(() => {});
   }, []);
 
-  if (pasteLoading) {
+  if (!pasteData) {
     return <div className="text-center">Loading...</div>;
   }
 
-  if (_.isEmpty(pasteData) && (!pasteLoading || pasteLoadingHasErrors)) {
+  if (_.isEmpty(pasteData) && !pasteLoading && pasteLoadingHasErrors) {
+    console.log(pasteData);
     return <Redirect to="/" />;
   }
 
-  const author = _.get(pasteData, "author", "Anonymous");
-  const creationTime = new Date(pasteData.creationTime);
+  const author = !_.isEmpty(pasteData.author) ? pasteData.author.username : "Anonymous";
+  const creationTime = formatDateTime(new Date(pasteData.creationTime));
 
   return (
     <div className="paste-content d-flex">
@@ -49,10 +51,12 @@ const Paste = (props: PasteProps) => {
           <div>Create at:</div>
           <div>{creationTime}</div>
         </div>
-        <div className="paste-info__line">
-          <div>Description:</div>
-          <div>{pasteData.description}</div>
-        </div>
+        {pasteData.description && (
+          <div className="paste-info__line">
+            <div>Description:</div>
+            <div>{pasteData.description}</div>
+          </div>
+        )}
         <div className="paste-info__line">
           <div>Link:</div>
           <div>{constructPasteLink(alias)}</div>
@@ -67,7 +71,7 @@ const Paste = (props: PasteProps) => {
 };
 
 const mapStateToProps = (state: StoreRootState) => ({
-  pasteData: state.editor.pasteData as (ExternalPaste),
+  pasteData: state.editor.pasteData as ExternalPaste,
   pasteLoading: state.editor.pasteLoading,
   pasteLoadingHasErrors: state.editor.pasteLoadingHasErrors,
 });

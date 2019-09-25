@@ -48,7 +48,19 @@ export default (state = initialState, action: any) => {
     }
 
     case ActionTypes.FETCH_PASTE_SUCCESS: {
-      return { ...state, pasteData: action.payload, pasteLoading: false };
+      return {
+        ...state,
+        editorData: {
+          ...state.editorData,
+          contents: JSON.parse(action.payload.code),
+          mode: modes[action.payload.dialect],
+          description: "",
+          views: undefined,
+        },
+        pasteData: action.payload,
+        pasteLoading: false,
+        pasteLoadingHasErrors: false,
+      };
     }
 
     case ActionTypes.FETCH_PASTE_FAIL: {
