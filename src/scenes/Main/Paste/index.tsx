@@ -5,10 +5,9 @@ import Editor from "#/scenes/Main/Editor";
 import "./index.scss";
 import { connect } from "react-redux";
 import { StoreRootState, ExternalPaste } from "#/store/types";
-import { modes, InternalModeOption } from "../Editor/util";
 import _ from "lodash";
 import { formatDateTime } from "#/util/functions";
-
+import CopyToClipboard from 'react-copy-to-clipboard';
 const constructPasteLink = (alias: string) => `${window.location.href}`;
 
 interface PasteProps extends RouteComponentProps<{ alias: string }> {
@@ -62,7 +61,10 @@ const Paste = (props: PasteProps) => {
         )}
         <div className="paste-info__line">
           <div>Link:</div>
-          <div>{constructPasteLink(alias)}</div>
+
+          <CopyToClipboard text = {constructPasteLink(alias)} >
+          <span>{constructPasteLink(alias)}</span>
+          </CopyToClipboard>
         </div>
         <div className="paste-info__line">
           <div>Views:</div>
