@@ -40,7 +40,7 @@ export default (state = initialState, action: any) => {
     }
 
     case ActionTypes.FORK_PASTE: {
-      return { ...state };
+      return { ...state, pasteData: null, currentEditorMode: EditorModes.Editor };
     }
 
     case ActionTypes.FETCH_PASTE_START: {
@@ -60,6 +60,7 @@ export default (state = initialState, action: any) => {
         pasteData: action.payload,
         pasteLoading: false,
         pasteLoadingHasErrors: false,
+        currentEditorMode: EditorModes.Paste,
       };
     }
 

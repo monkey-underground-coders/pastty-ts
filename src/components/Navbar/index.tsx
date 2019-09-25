@@ -15,22 +15,20 @@ interface NavbarProps extends RouteComponentProps {
 }
 
 const Navbar = (props: NavbarProps) => {
-  const { currentEditorMode, isAuthorized = false } = props;
+  const { createPaste, forkPaste, currentEditorMode, isAuthorized = false } = props;
 
-  const createPaste = (evt: ReactButtonEvent) => {
-    props
-      .createPaste()
+  const createPasteHandler = (evt: ReactButtonEvent) => {
+    createPaste()
       .then(() => {
         // Handle navigation here
       })
       .catch(() => {});
   };
 
-  const forkPaste = (evt: ReactButtonEvent) => {
-    props
-      .forkPaste()
+  const forkPasteHandler = (evt: ReactButtonEvent) => {
+    forkPaste()
       .then(() => {
-        // Handle navigation here
+        props.history.push("/");
       })
       .catch(() => {});
   };
@@ -63,12 +61,12 @@ const Navbar = (props: NavbarProps) => {
 
             <li className="nav-item ml-2">
               {currentEditorMode === EditorModes.Editor ? (
-                <button className="btn btn-success" onClick={createPaste}>
+                <button className="btn btn-success" onClick={createPasteHandler}>
                   <i className="fas fa-save" />
                   <span className="ml-2">Save</span>
                 </button>
               ) : (
-                <button className="btn btn-success" onClick={forkPaste}>
+                <button className="btn btn-success" onClick={forkPasteHandler}>
                   <i className="fas fa-code-branch" />
                   <span className="ml-2">Fork</span>
                 </button>
@@ -98,7 +96,7 @@ const Navbar = (props: NavbarProps) => {
 };
 
 const mapStateToProps = (state: StoreRootState) => ({
-  currentEditorMode: EditorModes.Editor,
+  currentEditorMode: state.editor.currentEditorMode,
 });
 
 const mapDispatchToProps = {
