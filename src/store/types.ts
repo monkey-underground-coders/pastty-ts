@@ -20,6 +20,20 @@ export interface Paste {
   views?: number;
 }
 
+export interface ExternalPaste {
+  author: string;
+  code: string;
+  creationTime: string;
+  dialect: string;
+  id: number;
+  name: string;
+  title: string;
+  type: string;
+  visible: boolean;
+  description: string;
+  views: number;
+}
+
 export interface Action {
   type: string;
   payload?: Record<string, any>;
@@ -43,4 +57,5 @@ export interface SessionState {
 export interface EditorState {
   currentEditorMode: EditorModes;
   editorData: Paste;
+  pasteData: ExternalPaste | undefined;
 }

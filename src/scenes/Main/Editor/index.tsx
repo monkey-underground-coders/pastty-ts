@@ -14,14 +14,15 @@ import "codemirror/addon/edit/closebrackets";
 
 interface EditorOwnProps {
   contents: string;
-  setContents: any;
+  setContents?: any;
   mode: InternalModeOption;
   className?: string;
   noRightRound?: string;
+  readOnly?: boolean;
 }
 
 const Editor = (props: EditorOwnProps) => {
-  const { mode, contents, setContents, className } = props;
+  const { mode, contents, setContents, className, readOnly = false } = props;
 
   const options: CodeMirror.EditorConfiguration = {
     lineNumbers: true,
@@ -31,6 +32,7 @@ const Editor = (props: EditorOwnProps) => {
     placeholder: "// Code",
     matchBrackets: true,
     autoCloseBrackets: true,
+    readOnly: readOnly,
   };
 
   return (

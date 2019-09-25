@@ -27,7 +27,7 @@ const Navbar = (props: NavbarProps) => {
       .catch(() => {});
   };
 
-  const forkpaste = (evt: ReactButtonEvent) => {
+  const forkPaste = (evt: ReactButtonEvent) => {
     props
       .forkPaste()
       .then(() => {
