@@ -4,12 +4,11 @@ import { fetchPaste } from "#/store/actions/editor";
 import Editor from "#/scenes/Main/Editor";
 import { connect } from "react-redux";
 import { StoreRootState, ExternalPaste } from "#/store/types";
-import loader from "#/assets/img/loader.svg";
 import _ from "lodash";
 import { formatDateTime } from "#/util/functions";
-import "./index.scss";
-
-const constructPasteLink = () => `${window.location.href}`;
+import CopyToClipboard from 'react-copy-to-clipboard';
+import loader from '#/assets/img/loader.svg';
+const constructPasteLink = (alias: string) => `${window.location.href}`;
 
 interface PasteProps extends RouteComponentProps<{ alias: string }> {
   fetchPaste: any;
@@ -65,8 +64,11 @@ const Paste = (props: PasteProps) => {
           </div>
         )}
         <div className="paste-info__line">
-          <div className="paste-info__line__title">Link</div>
-          <div>{constructPasteLink()}</div>
+          <div>Link:</div>
+
+          <CopyToClipboard text = {constructPasteLink(alias)} >
+          <span>{constructPasteLink(alias)}</span>
+          </CopyToClipboard>
         </div>
         <div className="paste-info__line">
           <div className="paste-info__line__title">Views</div>
