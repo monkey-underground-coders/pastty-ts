@@ -4,6 +4,7 @@ import { fetchPaste } from "#/store/actions/editor";
 import Editor from "#/scenes/Main/Editor";
 import { connect } from "react-redux";
 import { StoreRootState, ExternalPaste } from "#/store/types";
+import loader from "#/assets/img/loader.svg";
 import _ from "lodash";
 import { formatDateTime } from "#/util/functions";
 import "./index.scss";
@@ -34,7 +35,11 @@ const Paste = (props: PasteProps) => {
   }
 
   if (!pasteData) {
-    return <div className="text-center">Loading...</div>;
+    return (
+      <div className="paste-content text-center" style={{ padding: "5rem" }}>
+        <img src={loader} width="50" alt="" />
+      </div>
+    );
   }
 
   const author = !_.isEmpty(pasteData.author) ? pasteData.author.username : "Anonymous";
