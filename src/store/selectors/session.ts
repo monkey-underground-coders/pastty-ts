@@ -4,7 +4,6 @@ import { SessionState, StoreRootState } from "#/store/types";
 type Props = {} | null;
 
 const getSession = (store: StoreRootState, _: Props) => (store.session ? store.session : null);
-const getProps = (_: StoreRootState, props: Props) => props;
 
 export const getAuthToken = createSelector(
   [getSession],

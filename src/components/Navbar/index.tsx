@@ -5,7 +5,6 @@ import { withRouter, RouteComponentProps } from "react-router";
 import { StoreRootState, EditorModes, ReactButtonEvent } from "#/store/types";
 import { createPaste, forkPaste } from "#/store/actions/editor";
 import ModeSelect from "../ModeSelect";
-import OctoCat from "../OctoCat";
 import "./index.scss";
 
 interface NavbarProps extends RouteComponentProps {
@@ -39,9 +38,9 @@ const Navbar = (props: NavbarProps) => {
   return (
     <div className="header-module col-12 no-front-paddings">
       <nav className="navbar navbar-expand navbar-dark bg-dark py-2">
-        <a className="navbar-brand d-none d-sm-block" href="#">
+        <Link to="/" className="navbar-brand d-none d-sm-block">
           Pastty
-        </a>
+        </Link>
         <button
           className="navbar-toggler"
           type="button"
@@ -98,7 +97,7 @@ const Navbar = (props: NavbarProps) => {
   );
 };
 
-const mapStateToProps = (store: StoreRootState) => ({
+const mapStateToProps = (state: StoreRootState) => ({
   currentEditorMode: EditorModes.Editor,
 });
 

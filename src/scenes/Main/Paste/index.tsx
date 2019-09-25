@@ -2,14 +2,13 @@ import React, { useEffect } from "react";
 import { RouteComponentProps, withRouter, Redirect } from "react-router";
 import { fetchPaste } from "#/store/actions/editor";
 import Editor from "#/scenes/Main/Editor";
-import "./index.scss";
 import { connect } from "react-redux";
 import { StoreRootState, ExternalPaste } from "#/store/types";
-import { modes, InternalModeOption } from "../Editor/util";
 import _ from "lodash";
 import { formatDateTime } from "#/util/functions";
+import "./index.scss";
 
-const constructPasteLink = (alias: string) => `${window.location.href}`;
+const constructPasteLink = () => `${window.location.href}`;
 
 interface PasteProps extends RouteComponentProps<{ alias: string }> {
   fetchPaste: any;
@@ -28,7 +27,7 @@ const Paste = (props: PasteProps) => {
 
   useEffect(() => {
     props.fetchPaste(alias);
-  }, []);
+  }, [alias, props]);
 
   if (!pasteData && !pasteLoading && pasteLoadingHasErrors) {
     return redirectHome();
@@ -62,7 +61,7 @@ const Paste = (props: PasteProps) => {
         )}
         <div className="paste-info__line">
           <div className="paste-info__line__title">Link</div>
-          <div>{constructPasteLink(alias)}</div>
+          <div>{constructPasteLink()}</div>
         </div>
         <div className="paste-info__line">
           <div className="paste-info__line__title">Views</div>
