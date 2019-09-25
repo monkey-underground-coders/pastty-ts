@@ -3,11 +3,12 @@ import { Link } from "react-router-dom";
 import { connect } from "react-redux";
 import { withRouter, RouteComponentProps } from "react-router";
 import { StoreRootState, EditorModes, ReactButtonEvent } from "#/store/types";
-import { createPaste, forkPaste } from "#/store/actions/editor";
+import { createPaste, forkPaste, resetEditor } from "#/store/actions/editor";
 import ModeSelect from "./components/ModeSelect";
 import "./index.scss";
 
 interface NavbarProps extends RouteComponentProps {
+  resetEditor: any;
   forkPaste: any;
   createPaste: any;
   currentEditorMode: EditorModes;
@@ -15,7 +16,13 @@ interface NavbarProps extends RouteComponentProps {
 }
 
 const Navbar = (props: NavbarProps) => {
-  const { createPaste, forkPaste, currentEditorMode, isAuthorized = false } = props;
+  const { createPaste, forkPaste, resetEditor, currentEditorMode, isAuthorized = false } = props;
+
+  const resetEditorHandler = (evt: ReactButtonEvent) => {
+    resetEditor().then(() => {
+      props.history.push("/");
+    });
+  };
 
   const createPasteHandler = (evt: ReactButtonEvent) => {
     createPaste().then(() => {
@@ -50,9 +57,9 @@ const Navbar = (props: NavbarProps) => {
         <div className="collapse navbar-collapse" id="navbar">
           <ul className="navbar-nav mr-sm-auto">
             <li className="nav-item active">
-              <Link to="/" className="btn btn-primary">
+              <button className="btn btn-primary" onClick={resetEditorHandler}>
                 <i className="fas fa-plus-circle" /> New
-              </Link>
+              </button>
             </li>
 
             <li className="nav-item ml-2">
@@ -98,6 +105,7 @@ const mapStateToProps = (state: StoreRootState) => ({
 const mapDispatchToProps = {
   forkPaste,
   createPaste,
+  resetEditor,
 };
 
 export default withRouter(

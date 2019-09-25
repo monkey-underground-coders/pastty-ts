@@ -28,7 +28,7 @@ export const createPaste = () => (dispatch: Dispatch, getState: () => StoreRootS
 export const forkPaste = () => (dispatch: Dispatch, getState: () => StoreRootState) => {
   const { editorData } = getState().editor;
 
-  return new Promise((resolve, reject) => {
+  return new Promise(resolve => {
     dispatch({ type: ActionTypes.FORK_PASTE });
     return resolve();
   });
@@ -60,4 +60,11 @@ export const fetchPaste = (alias: string) => (
     .catch((err: any) => {
       dispatch({ type: ActionTypes.FETCH_PASTE_FAIL });
     });
+};
+
+export const resetEditor = () => (dispatch: Dispatch) => {
+  return new Promise(resolve => {
+    dispatch({ type: ActionTypes.RESET_EDITOR });
+    return resolve();
+  });
 };

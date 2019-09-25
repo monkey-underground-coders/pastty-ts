@@ -19,6 +19,10 @@ const initialState: EditorState = {
 
 export default (state = initialState, action: any) => {
   switch (action.type) {
+    case ActionTypes.RESET_EDITOR: {
+      return initialState;
+    }
+
     case ActionTypes.SET_EDITOR_MODE: {
       return { ...state, currentEditorMode: EditorModes.Editor };
     }
