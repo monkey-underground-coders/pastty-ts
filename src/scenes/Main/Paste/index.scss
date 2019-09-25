@@ -16,6 +16,12 @@ $paste-info-accent: #3f4954;
       &:not(:first-child) {
         margin-top: 0.75rem;
       }
+
+      &__title {
+        color: darkgray;
+        font-size: 0.8em;
+        text-transform: uppercase;
+      }
     }
   }
 }

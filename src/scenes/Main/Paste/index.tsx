@@ -2,12 +2,12 @@ import React, { useEffect } from "react";
 import { RouteComponentProps, withRouter, Redirect } from "react-router";
 import { fetchPaste } from "#/store/actions/editor";
 import Editor from "#/scenes/Main/Editor";
-import "./index.scss";
 import { connect } from "react-redux";
 import { StoreRootState, ExternalPaste } from "#/store/types";
 import _ from "lodash";
 import { formatDateTime } from "#/util/functions";
 import CopyToClipboard from 'react-copy-to-clipboard';
+import loader from '#/assets/img/loader.svg';
 const constructPasteLink = (alias: string) => `${window.location.href}`;
 
 interface PasteProps extends RouteComponentProps<{ alias: string }> {
@@ -27,14 +27,18 @@ const Paste = (props: PasteProps) => {
 
   useEffect(() => {
     props.fetchPaste(alias);
-  }, []);
+  }, [alias, props]);
 
   if (!pasteData && !pasteLoading && pasteLoadingHasErrors) {
     return redirectHome();
   }
 
   if (!pasteData) {
-    return <div className="text-center">Loading...</div>;
+    return (
+      <div className="paste-content text-center" style={{ padding: "5rem" }}>
+        <img src={loader} width="50" alt="" />
+      </div>
+    );
   }
 
   const author = !_.isEmpty(pasteData.author) ? pasteData.author.username : "Anonymous";
@@ -46,16 +50,16 @@ const Paste = (props: PasteProps) => {
 
       <div className="paste-info">
         <div className="paste-info__line">
-          <div>Author:</div>
+          <div className="paste-info__line__title">Author</div>
           <div>{author}</div>
         </div>
         <div className="paste-info__line">
-          <div>Create at:</div>
+          <div className="paste-info__line__title">Create at</div>
           <div>{creationTime}</div>
         </div>
         {pasteData.description && (
           <div className="paste-info__line">
-            <div>Description:</div>
+            <div className="paste-info__line__title">Description</div>
             <div>{pasteData.description}</div>
           </div>
         )}
@@ -67,7 +71,7 @@ const Paste = (props: PasteProps) => {
           </CopyToClipboard>
         </div>
         <div className="paste-info__line">
-          <div>Views:</div>
+          <div className="paste-info__line__title">Views</div>
           <div>{pasteData.views}</div>
         </div>
       </div>
