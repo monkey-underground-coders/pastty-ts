@@ -6,8 +6,9 @@ import { connect } from "react-redux";
 import { StoreRootState, ExternalPaste } from "#/store/types";
 import _ from "lodash";
 import { formatDateTime } from "#/util/functions";
-import CopyToClipboard from 'react-copy-to-clipboard';
-import loader from '#/assets/img/loader.svg';
+import CopyToClipboard from "react-copy-to-clipboard";
+import loader from "#/assets/img/loader.svg";
+
 const constructPasteLink = (alias: string) => `${window.location.href}`;
 
 interface PasteProps extends RouteComponentProps<{ alias: string }> {
@@ -66,8 +67,8 @@ const Paste = (props: PasteProps) => {
         <div className="paste-info__line">
           <div>Link:</div>
 
-          <CopyToClipboard text = {constructPasteLink(alias)} >
-          <span>{constructPasteLink(alias)}</span>
+          <CopyToClipboard text={constructPasteLink(alias)}>
+            <span>{constructPasteLink(alias)}</span>
           </CopyToClipboard>
         </div>
         <div className="paste-info__line">
