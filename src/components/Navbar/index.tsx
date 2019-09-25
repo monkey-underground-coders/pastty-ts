@@ -4,7 +4,7 @@ import { connect } from "react-redux";
 import { withRouter, RouteComponentProps } from "react-router";
 import { StoreRootState, EditorModes, ReactButtonEvent } from "#/store/types";
 import { createPaste, forkPaste } from "#/store/actions/editor";
-import ModeSelect from "../ModeSelect";
+import ModeSelect from "./components/ModeSelect";
 import "./index.scss";
 
 interface NavbarProps extends RouteComponentProps {
@@ -18,19 +18,15 @@ const Navbar = (props: NavbarProps) => {
   const { createPaste, forkPaste, currentEditorMode, isAuthorized = false } = props;
 
   const createPasteHandler = (evt: ReactButtonEvent) => {
-    createPaste()
-      .then(() => {
-        // Handle navigation here
-      })
-      .catch(() => {});
+    createPaste().then(() => {
+      // Handle navigation here
+    });
   };
 
   const forkPasteHandler = (evt: ReactButtonEvent) => {
-    forkPaste()
-      .then(() => {
-        props.history.push("/");
-      })
-      .catch(() => {});
+    forkPaste().then(() => {
+      props.history.push("/");
+    });
   };
 
   return (
