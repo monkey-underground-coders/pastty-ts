@@ -57,5 +57,5 @@ export interface SessionState {
 export interface EditorState {
   currentEditorMode: EditorModes;
   editorData: Paste;
-  pasteData: ExternalPaste | undefined;
+  pasteData: ExternalPaste | null;
 }

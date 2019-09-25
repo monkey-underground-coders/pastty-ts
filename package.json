@@ -7,6 +7,7 @@
     "@svgr/webpack": "4.1.0",
     "@types/history": "^4.7.3",
     "@types/jest": "24.0.15",
+    "@types/lodash": "^4.14.139",
     "@types/node": "12.0.12",
     "@types/node-sass": "^4.11.0",
     "@types/react": "16.8.23",

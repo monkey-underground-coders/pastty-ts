@@ -11,19 +11,7 @@ const initialState: EditorState = {
     theme: "",
     views: undefined,
   },
-  pasteData: {
-    author: "",
-    code: "",
-    creationTime: "",
-    dialect: "",
-    id: null,
-    name: "",
-    title: "",
-    type: "",
-    visible: null,
-    description: null,
-    views: null,
-  },
+  pasteData: null,
 };
 
 export default (state = initialState, action: any) => {

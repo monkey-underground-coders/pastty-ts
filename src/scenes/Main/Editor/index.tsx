@@ -2,21 +2,20 @@ import React from "react";
 import { connect } from "react-redux";
 import CodeMirror from "codemirror";
 import { Controlled as ReactCodeMirror } from "react-codemirror2";
-import { getModeTitle, modes, InternalModeOption } from "./util";
-import { ReactSelectEvent, ReactButtonEvent, StoreRootState } from "#/store/types";
+import { getModeTitle, InternalModeOption } from "./util";
+import { StoreRootState } from "#/store/types";
 import { setContents } from "#/store/actions/editor";
 import "codemirror/mode/javascript/javascript.js";
 import "codemirror/theme/gruvbox-dark.css";
-
 import "codemirror/addon/display/placeholder";
 import "codemirror/addon/edit/matchbrackets";
 import "codemirror/addon/edit/closebrackets";
 
 interface EditorOwnProps {
-  contents: string;
-  setContents?: any;
   mode: InternalModeOption;
+  contents: string;
   className?: string;
+  setContents?: any;
   noRightRound?: string;
   readOnly?: boolean;
 }
