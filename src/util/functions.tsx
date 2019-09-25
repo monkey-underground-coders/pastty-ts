@@ -12,7 +12,7 @@ export const getRenderProperty = (title: string, Component: any) => (props: any)
 export const formatDateTime = (date: Date | string) => {
   if (date === null || date === undefined) return date;
 
-  return new Date(date).toLocaleString("ru", {
+  return new Date(date).toLocaleString("en", {
     month: "long",
     day: "numeric",
     timeZone: "UTC",
