@@ -9,7 +9,7 @@ import { modes, InternalModeOption } from "../Editor/util";
 import _ from "lodash";
 import { formatDateTime } from "#/util/functions";
 
-const constructPasteLink = (alias: string) => `${window.location.href}${alias}`;
+const constructPasteLink = (alias: string) => `${window.location.href}`;
 
 interface PasteProps extends RouteComponentProps<{ alias: string }> {
   fetchPaste: any;
