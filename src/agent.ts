@@ -19,9 +19,11 @@ export const constructAuthorizationHeaders = () => {
   return { ...(authToken ? { Authorization: `Token ${authToken}` } : {}) };
 };
 
-const initialResponseHandler = (response: any) => {
+const initialResponseHandler = (method: string) => (response: any) => {
   if (!response.ok) {
-    throw new Error(`An error occured while sending POST request with status ${response.status}`);
+    throw new Error(
+      `An error occured while sending ${method} request with status ${response.status}`,
+    );
   }
   return response.json();
 };
@@ -34,14 +36,14 @@ export const postRequest = (url: string, body = {}, headers = {}) => {
       ...headers,
     },
     body: JSON.stringify(body),
-  }).then(initialResponseHandler);
+  }).then(initialResponseHandler("POST"));
 };
 
 export const postAuthenticatedRequest = (url: string, body = {}) =>
   postRequest(url, body, constructAuthorizationHeaders());
 
 export const getRequest = (url: string, headers = {}) =>
-  fetch(url, { headers }).then(initialResponseHandler);
+  fetch(url, { headers }).then(initialResponseHandler("GET"));
 
 export const getAuthenticatedRequest = (url: string) =>
   getRequest(url, constructAuthorizationHeaders());
@@ -51,10 +53,10 @@ export const putRequest = (url: string, body = {}) =>
     method: "PUT",
     headers: { ...constructRequestHeaders(), ...constructAuthorizationHeaders() },
     body: JSON.stringify(body),
-  }).then(initialResponseHandler);
+  }).then(initialResponseHandler("PUT"));
 
 export const deleteRequest = (url: string) =>
   fetch(url, {
     method: "DELETE",
     headers: { ...constructRequestHeaders(), ...constructAuthorizationHeaders() },
-  }).then(initialResponseHandler);
+  }).then(initialResponseHandler("DELETE"));
