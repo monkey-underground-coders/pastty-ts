@@ -20,21 +20,21 @@ interface PasteProps extends RouteComponentProps<{ alias: string }> {
 
 const Paste = (props: PasteProps) => {
   const { alias } = props.match.params;
-  const { pasteData, pasteLoading, pasteLoadingHasErrors } = props;
+  const { pasteData, pasteLoading, pasteLoadingHasErrors, fetchPaste } = props;
 
   const redirectHome = () => {
     return <Redirect to="/" />;
   };
 
   useEffect(() => {
-    props.fetchPaste(alias);
-  }, [alias, props]);
+    fetchPaste(alias);
+  }, [alias]);
 
   if (!pasteData && !pasteLoading && pasteLoadingHasErrors) {
     return redirectHome();
   }
 
-  if (!pasteData) {
+  if (!pasteData || pasteLoading) {
     return (
       <div className="paste-content text-center" style={{ padding: "5rem" }}>
         <img src={loader} width="50" alt="" />

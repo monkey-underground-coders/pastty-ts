@@ -27,7 +27,11 @@ export const createPaste = () => (dispatch: Dispatch, getState: () => StoreRootS
 
 export const forkPaste = () => (dispatch: Dispatch, getState: () => StoreRootState) => {
   const { editorData } = getState().editor;
-  console.log("gotta fork this shit: ", editorData);
+
+  return new Promise((resolve, reject) => {
+    dispatch({ type: ActionTypes.FORK_PASTE });
+    return resolve();
+  });
 };
 
 export const changeMode = (mode: InternalModeOption) => (
