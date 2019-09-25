@@ -12,6 +12,9 @@ const initialState: EditorState = {
     views: undefined,
   },
   pasteData: null,
+
+  pasteLoading: false,
+  pasteLoadingHasErrors: false,
 };
 
 export default (state = initialState, action: any) => {
@@ -38,6 +41,18 @@ export default (state = initialState, action: any) => {
 
     case ActionTypes.FORK_PASTE: {
       return { ...state };
+    }
+
+    case ActionTypes.FETCH_PASTE_START: {
+      return { ...state, pasteLoading: true };
+    }
+
+    case ActionTypes.FETCH_PASTE_SUCCESS: {
+      return { ...state, pasteData: action.payload, pasteLoading: false };
+    }
+
+    case ActionTypes.FETCH_PASTE_FAIL: {
+      return { ...state, pasteLoading: false, pasteLoadingHasErrors: true };
     }
 
     default:

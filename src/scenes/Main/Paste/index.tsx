@@ -11,36 +11,43 @@ import _ from "lodash";
 const constructPasteLink = (alias: string) => `${window.location.href}alias`;
 
 interface PasteProps extends RouteComponentProps<{ alias: string }> {
+  fetchPaste: any;
   pasteData: ExternalPaste;
+  pasteLoading: boolean;
+  pasteLoadingHasErrors: boolean;
 }
 
 const Paste = (props: PasteProps) => {
   const { alias } = props.match.params;
-  const { pasteData } = props;
+  const { pasteData, pasteLoading, pasteLoadingHasErrors } = props;
 
-  if (_.isEmpty(pasteData)) {
+  useEffect(() => {
+    props.fetchPaste(alias).then(() => {});
+  }, []);
+
+  if (pasteLoading) {
+    return <div className="text-center">Loading...</div>;
+  }
+
+  if (_.isEmpty(pasteData) && (!pasteLoading || pasteLoadingHasErrors)) {
     return <Redirect to="/" />;
   }
 
-  const currentMode: InternalModeOption = modes[pasteData.dialect];
+  const author = _.get(pasteData, "author", "Anonymous");
+  const creationTime = new Date(pasteData.creationTime);
 
   return (
     <div className="paste-content d-flex">
-      <Editor
-      // className="w-100"
-      // readOnly={true}
-      // mode={currentMode}
-      // contents={pasteData.code}
-      />
+      <Editor readOnly={true} className="w-100" />
 
       <div className="paste-info">
         <div className="paste-info__line">
           <div>Author:</div>
-          <div>{pasteData.author}</div>
+          <div>{author}</div>
         </div>
         <div className="paste-info__line">
           <div>Create at:</div>
-          <div>{pasteData.creationTime}</div>
+          <div>{creationTime}</div>
         </div>
         <div className="paste-info__line">
           <div>Description:</div>
@@ -61,11 +68,17 @@ const Paste = (props: PasteProps) => {
 
 const mapStateToProps = (state: StoreRootState) => ({
   pasteData: state.editor.pasteData as (ExternalPaste),
+  pasteLoading: state.editor.pasteLoading,
+  pasteLoadingHasErrors: state.editor.pasteLoadingHasErrors,
 });
+
+const mapDispatchToProps = {
+  fetchPaste,
+};
 
 export default withRouter(
   connect(
     mapStateToProps,
-    null,
+    mapDispatchToProps,
   )(Paste),
 );

@@ -10,8 +10,9 @@ import "codemirror/theme/gruvbox-dark.css";
 import "codemirror/addon/display/placeholder";
 import "codemirror/addon/edit/matchbrackets";
 import "codemirror/addon/edit/closebrackets";
+import _ from "lodash";
 
-interface EditorOwnProps {
+interface EditorOwnProps extends React.Props<any> {
   mode: InternalModeOption;
   contents: string;
   className?: string;
@@ -21,7 +22,7 @@ interface EditorOwnProps {
 }
 
 const Editor = (props: EditorOwnProps) => {
-  const { mode, contents, setContents, className, readOnly = false } = props;
+  const { mode, className = "" } = props;
 
   const options: CodeMirror.EditorConfiguration = {
     lineNumbers: true,
@@ -31,21 +32,20 @@ const Editor = (props: EditorOwnProps) => {
     placeholder: "// Code",
     matchBrackets: true,
     autoCloseBrackets: true,
-    readOnly: readOnly,
+    readOnly: _.get(props, "readOnly", false),
+  };
+
+  const editorProps = {
+    value: _.get(props, "contents", ""),
+    onBeforeChange: (editor: CodeMirror.Editor, data: CodeMirror.EditorChange, value: string) =>
+      _.get(props, "setContents", () => {})(value),
+    options,
   };
 
   return (
     <>
       <div className={`editor-content ${className}`}>
-        <ReactCodeMirror
-          value={contents}
-          onBeforeChange={(
-            editor: CodeMirror.Editor,
-            data: CodeMirror.EditorChange,
-            value: string,
-          ) => setContents(value)}
-          options={options}
-        />
+        <ReactCodeMirror {...editorProps} />
       </div>
     </>
   );

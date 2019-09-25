@@ -21,7 +21,7 @@ export interface Paste {
 }
 
 export interface ExternalPaste {
-  author: string;
+  author: any;
   code: string;
   creationTime: string;
   dialect: string;
@@ -58,4 +58,7 @@ export interface EditorState {
   currentEditorMode: EditorModes;
   editorData: Paste;
   pasteData: ExternalPaste | null;
+
+  pasteLoading: boolean;
+  pasteLoadingHasErrors: boolean;
 }

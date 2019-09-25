@@ -49,4 +49,11 @@ export const fetchPaste = (alias: string) => (
   getState: () => StoreRootState,
 ) => {
   dispatch({ type: ActionTypes.FETCH_PASTE_START });
+  return getRequest(apiRoutes.fetchScript(alias))
+    .then((json: any) => {
+      dispatch({ type: ActionTypes.FETCH_PASTE_SUCCESS, payload: json });
+    })
+    .catch((err: any) => {
+      dispatch({ type: ActionTypes.FETCH_PASTE_FAIL });
+    });
 };

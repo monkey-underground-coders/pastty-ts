@@ -8,6 +8,7 @@ export const apiRoutes = {
 
   // Scripts / Paste
   uploadScript: getAbsoluteUrl(`script/upload`),
+  fetchScript: (alias: string) => getAbsoluteUrl(`script/s/${alias}`),
 };
 
 export default apiRoutes;
