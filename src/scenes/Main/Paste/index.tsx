@@ -47,25 +47,25 @@ const Paste = (props: PasteProps) => {
 
       <div className="paste-info">
         <div className="paste-info__line">
-          <div>Author:</div>
+          <div className="paste-info__line__title">Author</div>
           <div>{author}</div>
         </div>
         <div className="paste-info__line">
-          <div>Create at:</div>
+          <div className="paste-info__line__title">Create at</div>
           <div>{creationTime}</div>
         </div>
         {pasteData.description && (
           <div className="paste-info__line">
-            <div>Description:</div>
+            <div className="paste-info__line__title">Description</div>
             <div>{pasteData.description}</div>
           </div>
         )}
         <div className="paste-info__line">
-          <div>Link:</div>
+          <div className="paste-info__line__title">Link</div>
           <div>{constructPasteLink(alias)}</div>
         </div>
         <div className="paste-info__line">
-          <div>Views:</div>
+          <div className="paste-info__line__title">Views</div>
           <div>{pasteData.views}</div>
         </div>
       </div>
