@@ -8,8 +8,7 @@ import _ from "lodash";
 import { formatDateTime } from "#/util/functions";
 import CopyToClipboard from "react-copy-to-clipboard";
 import loader from "#/assets/img/loader.svg";
-
-const constructPasteLink = (alias: string) => `${window.location.href}`;
+import "./index.scss";
 
 interface PasteProps extends RouteComponentProps<{ alias: string }> {
   fetchPaste: any;
@@ -67,8 +66,8 @@ const Paste = (props: PasteProps) => {
         <div className="paste-info__line">
           <div>Link:</div>
 
-          <CopyToClipboard text={constructPasteLink(alias)}>
-            <span>{constructPasteLink(alias)}</span>
+          <CopyToClipboard text={window.location.href}>
+            <span>{window.location.href}</span>
           </CopyToClipboard>
         </div>
         <div className="paste-info__line">
