@@ -3,16 +3,20 @@ import { getAuthToken } from "./store/selectors/session";
 import { StoreRootState } from "./store/types";
 
 export const constructGenericRequestHeaders = () => ({
+  accept: "application/json",
   "Content-Type": "application/json",
 });
 
 export const constructRequestHeaders = (params = {}) => {
-  const authToken = getAuthToken(store.getState() as StoreRootState, null);
   return {
     ...constructGenericRequestHeaders(),
-    ...(authToken ? { Authorization: `Token ${authToken}` } : {}),
     ...params,
   };
+};
+
+export const constructAuthorizationHeaders = () => {
+  const authToken = getAuthToken(store.getState() as StoreRootState, null);
+  return { ...(authToken ? { Authorization: `Token ${authToken}` } : {}) };
 };
 
 const initialResponseHandler = (response: any) => {
@@ -22,30 +26,35 @@ const initialResponseHandler = (response: any) => {
   return response.json();
 };
 
-export const postRequest = (url: string, body = {}, headers = {}) =>
-  fetch(url, {
+export const postRequest = (url: string, body = {}, headers = {}) => {
+  return fetch(url, {
     method: "POST",
-    headers,
+    headers: {
+      ...constructRequestHeaders(),
+      ...headers,
+    },
     body: JSON.stringify(body),
   }).then(initialResponseHandler);
+};
 
 export const postAuthenticatedRequest = (url: string, body = {}) =>
-  postRequest(url, body, constructRequestHeaders());
+  postRequest(url, body, constructAuthorizationHeaders());
 
 export const getRequest = (url: string, headers = {}) =>
   fetch(url, { headers }).then(initialResponseHandler);
 
-export const getAuthenticatedRequest = (url: string) => getRequest(url, constructRequestHeaders());
+export const getAuthenticatedRequest = (url: string) =>
+  getRequest(url, constructAuthorizationHeaders());
 
 export const putRequest = (url: string, body = {}) =>
   fetch(url, {
     method: "PUT",
-    headers: constructRequestHeaders(),
+    headers: { ...constructRequestHeaders(), ...constructAuthorizationHeaders() },
     body: JSON.stringify(body),
   }).then(initialResponseHandler);
 
 export const deleteRequest = (url: string) =>
   fetch(url, {
     method: "DELETE",
-    headers: constructRequestHeaders(),
+    headers: { ...constructRequestHeaders(), ...constructAuthorizationHeaders() },
   }).then(initialResponseHandler);

@@ -2,7 +2,7 @@ import React from "react";
 import { Link } from "react-router-dom";
 import { connect } from "react-redux";
 import { withRouter, RouteComponentProps } from "react-router";
-import { StoreRootState, EditorModes } from "#/store/types";
+import { StoreRootState, EditorModes, ReactButtonEvent } from "#/store/types";
 import { createPaste, forkPaste } from "#/store/actions/editor";
 import ModeSelect from "../ModeSelect";
 import OctoCat from "../OctoCat";
@@ -12,12 +12,29 @@ interface NavbarProps extends RouteComponentProps {
   forkPaste: any;
   createPaste: any;
   currentEditorMode: EditorModes;
-
   isAuthorized?: boolean;
 }
 
 const Navbar = (props: NavbarProps) => {
-  const { currentEditorMode, createPaste, isAuthorized = false } = props;
+  const { currentEditorMode, isAuthorized = false } = props;
+
+  const createPaste = (evt: ReactButtonEvent) => {
+    props
+      .createPaste()
+      .then(() => {
+        // Handle navigation here
+      })
+      .catch(() => {});
+  };
+
+  const forkpaste = (evt: ReactButtonEvent) => {
+    props
+      .forkPaste()
+      .then(() => {
+        // Handle navigation here
+      })
+      .catch(() => {});
+  };
 
   return (
     <div className="header-module col-12 no-front-paddings">

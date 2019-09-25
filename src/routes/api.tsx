@@ -1,7 +1,13 @@
-export const hostname = "http://localhost:8000/";
+export const hostname = "https://pastty.a6raywa1cher.com/pastty-spring/";
 
 const getAbsoluteUrl = (route: string) => `${hostname}${route}`;
 
-export default {
+export const apiRoutes = {
+  // Auth
   authorize: getAbsoluteUrl(`user/authorize`),
+
+  // Scripts / Paste
+  uploadScript: getAbsoluteUrl(`script/upload`),
 };
+
+export default apiRoutes;

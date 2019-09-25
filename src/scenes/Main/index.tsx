@@ -30,9 +30,8 @@ const MainScene = (props: any) => {
             />
           </Switch>
         </div>
+        <OctocatWrapper />
       </div>
-
-      <OctocatWrapper />
     </>
   );
 };

@@ -1,12 +1,28 @@
 import { Dispatch } from "redux";
 import ActionTypes from "../actionTypes";
-import { getRequest } from "#/agent";
+import { getRequest, postRequest } from "#/agent";
 import { InternalModeOption } from "#/scenes/Main/Editor/util";
 import { StoreRootState } from "../types";
+import { apiRoutes } from "#/routes/api";
 
 export const createPaste = () => (dispatch: Dispatch, getState: () => StoreRootState) => {
   const { editorData } = getState().editor;
-  console.log(JSON.stringify(editorData.contents));
+
+  if (editorData.contents) {
+    const payload = {
+      code: JSON.stringify(editorData.contents),
+      dialect: editorData.mode.value,
+      title: "default",
+      visible: true,
+    };
+    return postRequest(apiRoutes.uploadScript, payload)
+      .then((json: any) => {
+        console.log(json);
+      })
+      .catch((err: any) => {
+        console.error(err);
+      });
+  }
 };
 
 export const forkPaste = () => (dispatch: Dispatch, getState: () => StoreRootState) => {
