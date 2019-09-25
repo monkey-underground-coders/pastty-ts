@@ -22,17 +22,20 @@ const Paste = (props: PasteProps) => {
   const { alias } = props.match.params;
   const { pasteData, pasteLoading, pasteLoadingHasErrors } = props;
 
+  const redirectHome = () => {
+    return <Redirect to="/" />;
+  };
+
   useEffect(() => {
-    props.fetchPaste(alias).then(() => {});
+    props.fetchPaste(alias);
   }, []);
+
+  if (!pasteData && !pasteLoading && pasteLoadingHasErrors) {
+    return redirectHome();
+  }
 
   if (!pasteData) {
     return <div className="text-center">Loading...</div>;
-  }
-
-  if (_.isEmpty(pasteData) && !pasteLoading && pasteLoadingHasErrors) {
-    console.log(pasteData);
-    return <Redirect to="/" />;
   }
 
   const author = !_.isEmpty(pasteData.author) ? pasteData.author.username : "Anonymous";
