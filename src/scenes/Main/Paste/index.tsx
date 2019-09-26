@@ -9,7 +9,7 @@ import { formatDateTime } from "#/util/functions";
 import CopyToClipboard from "react-copy-to-clipboard";
 import loader from "#/assets/img/loader.svg";
 import "./index.scss";
-
+import ReactTooltip from 'react-tooltip'
 interface PasteProps extends RouteComponentProps<{ alias: string }> {
   fetchPaste: any;
   pasteData: ExternalPaste;
@@ -67,7 +67,7 @@ const Paste = (props: PasteProps) => {
           <div className="paste-info__line__title">Link</div>
 
           <CopyToClipboard text={window.location.href}>
-            <span className="paste-info__line__copy" title="Copy to clipboard">
+            <span className="paste-info__line__copy" title="Copy to clipboard" data-tip = "Copied!" data-event = "click focus">
               {window.location.href}
             </span>
           </CopyToClipboard>
@@ -77,6 +77,7 @@ const Paste = (props: PasteProps) => {
           <div>{pasteData.views}</div>
         </div>
       </div>
+    <ReactTooltip place = "bottom" globalEventOff = 'click' />
     </div>
   );
 };
