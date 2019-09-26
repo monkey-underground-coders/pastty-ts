@@ -4,7 +4,8 @@ import Application from "#/components/Application";
 import { Provider } from "react-redux";
 import { BrowserRouter } from "react-router-dom";
 import { store } from "./store";
-import "#/styles/main.scss"
+import "bootstrap/dist/css/bootstrap.min.css";
+import "#/styles/main.scss";
 import * as serviceWorker from "./serviceWorker";
 
 const rootElement = document.getElementById("root");
