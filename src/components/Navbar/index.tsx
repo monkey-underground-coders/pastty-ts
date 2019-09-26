@@ -39,7 +39,7 @@ const MainNavbar = (props: NavbarProps) => {
 
   return (
     <div className="header-module">
-      <Navbar variant="dark" bg="dark" expand="md">
+      <Navbar variant="dark" bg="dark" expand="lg">
         <Navbar.Brand href="/">Pastty</Navbar.Brand>
         <Navbar.Toggle aria-controls="navbar-nav"></Navbar.Toggle>
         <Navbar.Collapse id="navbar-nav">
