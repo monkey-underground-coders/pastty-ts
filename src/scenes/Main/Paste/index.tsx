@@ -67,7 +67,9 @@ const Paste = (props: PasteProps) => {
           <div className="paste-info__line__title">Link</div>
 
           <CopyToClipboard text={window.location.href}>
-            <span className="paste-info__line__copy" title="Copy to clipboard">{window.location.href}</span>
+            <span className="paste-info__line__copy" title="Copy to clipboard">
+              {window.location.href}
+            </span>
           </CopyToClipboard>
         </div>
         <div className="paste-info__line">

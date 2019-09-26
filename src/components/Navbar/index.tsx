@@ -5,6 +5,7 @@ import { withRouter, RouteComponentProps } from "react-router";
 import { StoreRootState, EditorModes, ReactButtonEvent } from "#/store/types";
 import { createPaste, forkPaste, resetEditor } from "#/store/actions/editor";
 import ModeSelect from "./components/ModeSelect";
+import { Navbar, Nav } from "react-bootstrap";
 import "./index.scss";
 
 interface NavbarProps extends RouteComponentProps {
@@ -15,7 +16,7 @@ interface NavbarProps extends RouteComponentProps {
   isAuthorized?: boolean;
 }
 
-const Navbar = (props: NavbarProps) => {
+const MainNavbar = (props: NavbarProps) => {
   const { createPaste, forkPaste, resetEditor, currentEditorMode, isAuthorized = false } = props;
 
   const resetEditorHandler = (evt: ReactButtonEvent) => {
@@ -25,8 +26,8 @@ const Navbar = (props: NavbarProps) => {
   };
 
   const createPasteHandler = (evt: ReactButtonEvent) => {
-    createPaste().then(() => {
-      // Handle navigation here
+    createPaste().then((alias: string) => {
+      props.history.push(`/${alias}`);
     });
   };
 
@@ -37,32 +38,18 @@ const Navbar = (props: NavbarProps) => {
   };
 
   return (
-    <div className="header-module col-12 no-front-paddings">
-      <nav className="navbar navbar-expand navbar-dark bg-dark py-2">
-        <Link to="/" className="navbar-brand d-none d-sm-block">
-          Pastty
-        </Link>
-        <button
-          className="navbar-toggler"
-          type="button"
-          data-toggle="collapse"
-          data-target="#navbar"
-          aria-controls="navbar"
-          aria-expanded="false"
-          aria-label="Toggle navigation"
-        >
-          <span className="navbar-toggler-icon"></span>
-        </button>
-
-        <div className="collapse navbar-collapse" id="navbar">
-          <ul className="navbar-nav mr-sm-auto">
-            <li className="nav-item active">
+    <div className="header-module">
+      <Navbar variant="dark" bg="dark" expand="md">
+        <Navbar.Brand href="/">Pastty</Navbar.Brand>
+        <Navbar.Toggle aria-controls="navbar-nav"></Navbar.Toggle>
+        <Navbar.Collapse id="navbar-nav">
+          <Nav className="mr-auto">
+            <Nav.Item>
               <button className="btn btn-primary" onClick={resetEditorHandler}>
                 <i className="fas fa-plus-circle" /> New
               </button>
-            </li>
-
-            <li className="nav-item ml-2">
+            </Nav.Item>
+            <Nav.Item>
               {currentEditorMode === EditorModes.Editor ? (
                 <button className="btn btn-success" onClick={createPasteHandler}>
                   <i className="fas fa-save" />
@@ -74,26 +61,29 @@ const Navbar = (props: NavbarProps) => {
                   <span className="ml-2">Fork</span>
                 </button>
               )}
-            </li>
-            <li className="nav-item ml-2 syntax-select-item">
+            </Nav.Item>
+            <Nav.Item>
               <ModeSelect />
-            </li>
-          </ul>
-          <form className="form-inline login-btns">
-            {isAuthorized ? (
-              <button className="btn btn-outline-success login-btns__signout">
-                <i className="fa fa-sign-out-alt" />
-                <span className="ml-2">Sign Out</span>
-              </button>
-            ) : (
-              <button className="btn btn-outline-success login-btns__signin">
-                <i className="fa fa-sign-in-alt" />
-                <span className="ml-2">Sign In</span>
-              </button>
-            )}
-          </form>
-        </div>
-      </nav>
+            </Nav.Item>
+          </Nav>
+
+          <div className="ml-auto">
+            <form className="form-inline login-btns nav-item">
+              {isAuthorized ? (
+                <button className="btn btn-outline-success login-btns__signout">
+                  <i className="fa fa-sign-out-alt" />
+                  <span className="ml-2">Sign Out</span>
+                </button>
+              ) : (
+                <button className="btn btn-outline-success login-btns__signin">
+                  <i className="fa fa-sign-in-alt" />
+                  <span className="ml-2">Sign In</span>
+                </button>
+              )}
+            </form>
+          </div>
+        </Navbar.Collapse>
+      </Navbar>
     </div>
   );
 };
@@ -112,5 +102,5 @@ export default withRouter(
   connect(
     mapStateToProps,
     mapDispatchToProps,
-  )(Navbar),
+  )(MainNavbar),
 );

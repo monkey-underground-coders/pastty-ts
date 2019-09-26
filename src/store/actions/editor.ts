@@ -17,7 +17,7 @@ export const createPaste = () => (dispatch: Dispatch, getState: () => StoreRootS
     };
     return postRequest(apiRoutes.uploadScript, payload)
       .then((json: any) => {
-        console.log(json);
+        return json.name;
       })
       .catch((err: any) => {
         console.error(err);

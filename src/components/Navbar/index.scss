@@ -1,12 +1,30 @@
-.header-module {
-  padding-left: 0;
-  padding-right: 0;
-}
+@import "#/styles/mixins.scss";
 
-// .login-btns {
-//   button:last-child,
-//   &.signout {
-//     margin-right: 2rem;
-//     margin-left: 1rem;
-//   }
-// }
+.header-module {
+  width: 100%;
+
+  .navbar-collapse {
+    .nav-item {
+      margin-left: 0.5rem;
+
+      @include less-md {
+        margin-top: 0.5rem;
+        margin-left: 0;
+
+        &:first-child {
+          margin-top: 1rem;
+        }
+      }
+
+      &,
+      button,
+      select {
+        width: 100%;
+
+        @include greater-md {
+          width: unset;
+        }
+      }
+    }
+  }
+}

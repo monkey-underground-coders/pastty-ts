@@ -1,0 +1,14 @@
+$md: 767px;
+$lg: 991px;
+
+@mixin greater-md {
+  @media (min-width: $md) {
+    @content;
+  }
+}
+
+@mixin less-md {
+  @media (max-width: $md) {
+    @content;
+  }
+}
