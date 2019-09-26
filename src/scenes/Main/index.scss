@@ -1,36 +1,35 @@
+@import "#/styles/mixins.scss";
+
 $border-root-size: 5px;
 
 .main-scene {
   display: flex;
   flex-direction: column;
   height: 100vh;
-  align-content: center;
-  justify-content: center;
 
-  &__inner {
-    margin: 0 3rem;
-    margin-bottom: 2rem;
-    box-shadow: -2px 5px 5px 0px rgba(0, 0, 0, 0.75);
+  @include greater-md {
+    align-content: center;
+    justify-content: center;
 
-    // This may be an alternative
-    // box-shadow: 0px 4px 10px 3px rgba(0, 0, 0, 0.75)
-    border-radius: $border-root-size;
-  }
+    &__inner {
+      margin: 0 3rem;
+      margin-bottom: 2rem;
+      // box-shadow: -2px 5px 5px 0px rgba(0, 0, 0, 0.75);
 
-  .header-module {
-    .navbar {
-      border-top-left-radius: $border-root-size;
+      // This may be an alternative
+      box-shadow: 0px 4px 10px 3px rgba(0, 0, 0, 0.5);
+      border-radius: $border-root-size;
     }
 
-    .navbar,
-    a.github-corner svg {
-      border-top-right-radius: $border-root-size;
+    .header-module {
+      .navbar {
+        border-radius: $border-root-size $border-root-size 0 0;
+      }
     }
   }
 
   .CodeMirror {
-    border-bottom-left-radius: $border-root-size;
-    border-bottom-right-radius: $border-root-size;
+    border-radius: 0 0 $border-root-size $border-root-size;
 
     &-vscrollbar {
       cursor: default;
