@@ -17,7 +17,7 @@ interface NavbarProps extends RouteComponentProps {
 }
 
 const MainNavbar = (props: NavbarProps) => {
-  const { createPaste, forkPaste, resetEditor, currentEditorMode, isAuthorized = false } = props;
+  const { createPaste, forkPaste, resetEditor, currentEditorMode, isAuthorized = false} = props;
 
   const resetEditorHandler = (evt: ReactButtonEvent) => {
     resetEditor().then(() => {

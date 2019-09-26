@@ -68,8 +68,10 @@ const Paste = (props: PasteProps) => {
           <div className="paste-info__line__title">Link</div>
 
           <CopyToClipboard text={window.location.href}>
-            <span className="paste-info__line__copy" title="Copy to clipboard" data-tip="Copied!">
+            <span className="paste-info__line__copy">
+              <div data-tip="Copied!">
               {window.location.href}
+              </div>
             </span>
           </CopyToClipboard>
         </div>
@@ -78,7 +80,7 @@ const Paste = (props: PasteProps) => {
           <div>{pasteData.views}</div>
         </div>
       </div>
-      <ReactTooltip place="bottom" effect="solid" event="click" globalEventOff="mouseout" />
+      <ReactTooltip place="bottom" effect="solid" event="click" globalEventOff="mouseout" isCapture={true}/>
     </div>
   );
 };
