@@ -12,3 +12,15 @@ $lg: 991px;
     @content;
   }
 }
+
+@mixin greater-lg {
+  @media (min-width: $lg) {
+    @content;
+  }
+}
+
+@mixin less-lg {
+  @media (max-width: $lg) {
+    @content;
+  }
+}
