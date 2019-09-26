@@ -77,7 +77,7 @@ const Paste = (props: PasteProps) => {
           <div>{pasteData.views}</div>
         </div>
       </div>
-    <ReactTooltip place = "bottom" globalEventOff = 'click' />
+    <ReactTooltip place = "bottom" globalEventOff = 'mouseout' />
     </div>
   );
 };
