@@ -5,15 +5,14 @@ $border-root-size: 5px;
 .main-scene {
   display: flex;
   flex-direction: column;
-  height: 100vh;
+  height: 100%;
 
   @include greater-md {
     align-content: center;
     justify-content: center;
 
     &__inner {
-      margin: 0 3rem;
-      margin-bottom: 2rem;
+      margin: 3rem;
       // box-shadow: -2px 5px 5px 0px rgba(0, 0, 0, 0.75);
 
       // This may be an alternative
