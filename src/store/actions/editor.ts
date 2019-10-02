@@ -4,6 +4,8 @@ import { getRequest, postRequest } from "#/agent";
 import { InternalModeOption } from "#/scenes/Main/Editor/util";
 import { StoreRootState } from "../types";
 import { apiRoutes } from "#/routes/api";
+import { modes } from '#/scenes/Main/Editor/util';
+import _ from "lodash"
 
 export const createPaste = () => (dispatch: Dispatch, getState: () => StoreRootState) => {
   const { editorData } = getState().editor;
@@ -55,7 +57,11 @@ export const fetchPaste = (alias: string) => (
   dispatch({ type: ActionTypes.FETCH_PASTE_START });
   return getRequest(apiRoutes.fetchScript(alias))
     .then((json: any) => {
-      dispatch({ type: ActionTypes.FETCH_PASTE_SUCCESS, payload: json });
+      const syntax = _.get(json, 'dialect', 'JavaScript');
+      const currentMode = modes[syntax];
+      import(`codemirror/mode/${currentMode.signature}/${currentMode.signature}`).then(() => {
+        dispatch({ type: ActionTypes.FETCH_PASTE_SUCCESS, payload: { json, mode: currentMode } });
+      })
     })
     .catch((err: any) => {
       dispatch({ type: ActionTypes.FETCH_PASTE_FAIL });

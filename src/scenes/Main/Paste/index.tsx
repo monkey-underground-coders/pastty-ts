@@ -10,12 +10,14 @@ import CopyToClipboard from "react-copy-to-clipboard";
 import loader from "#/assets/img/loader.svg";
 import "./index.scss";
 import ReactTooltip from "react-tooltip";
+import { changeMode } from "#/store/actions/editor";
 
 interface PasteProps extends RouteComponentProps<{ alias: string }> {
   fetchPaste: any;
   pasteData: ExternalPaste;
   pasteLoading: boolean;
   pasteLoadingHasErrors: boolean;
+  changeMode: any
 }
 
 const Paste = (props: PasteProps) => {
@@ -55,7 +57,7 @@ const Paste = (props: PasteProps) => {
           <div>{author}</div>
         </div>
         <div className="paste-info__line">
-          <div className="paste-info__line__title">Create at</div>
+          <div className="paste-info__line__title">Created at</div>
           <div>{creationTime}</div>
         </div>
         {pasteData.description && (
@@ -70,7 +72,7 @@ const Paste = (props: PasteProps) => {
           <CopyToClipboard text={window.location.href}>
             <span className="paste-info__line__copy">
               <div data-tip="Copied!">
-              {window.location.href}
+                {window.location.href}
               </div>
             </span>
           </CopyToClipboard>
@@ -80,7 +82,7 @@ const Paste = (props: PasteProps) => {
           <div>{pasteData.views}</div>
         </div>
       </div>
-      <ReactTooltip place="bottom" effect="solid" event="click" globalEventOff="mouseout" isCapture={true}/>
+      <ReactTooltip place="bottom" effect="solid" event="click" globalEventOff="mouseout" isCapture={true} />
     </div>
   );
 };
@@ -93,6 +95,7 @@ const mapStateToProps = (state: StoreRootState) => ({
 
 const mapDispatchToProps = {
   fetchPaste,
+  changeMode
 };
 
 export default withRouter(

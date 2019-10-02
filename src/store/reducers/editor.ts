@@ -56,8 +56,8 @@ export default (state = initialState, action: any) => {
         ...state,
         editorData: {
           ...state.editorData,
-          contents: JSON.parse(action.payload.code),
-          mode: modes[action.payload.dialect],
+          contents: JSON.parse(action.payload.json.code),
+          mode: action.payload.mode,
           description: "",
           views: undefined,
         },
