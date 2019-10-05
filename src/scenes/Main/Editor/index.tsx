@@ -33,6 +33,7 @@ const Editor = (props: EditorOwnProps) => {
     matchBrackets: true,
     autoCloseBrackets: true,
     readOnly: _.get(props, "readOnly", false),
+    lineWrapping: true
   };
 
   const editorProps = {
